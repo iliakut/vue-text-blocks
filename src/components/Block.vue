@@ -8,7 +8,7 @@
       <v-card-title>
         <span>Сложный блок</span>
         <v-spacer></v-spacer>
-        <v-btn icon>
+        <v-btn icon v-on:click="$emit('delete-block')">
           <v-icon>clear</v-icon>
         </v-btn>
       </v-card-title>
@@ -22,15 +22,14 @@
           <v-list-tile-title>Атлант расправил плечи (с)</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
-
     </v-card>
   </v-container>
 </template>
 
 <script>
-  export default {
-    data: () => {
-      return {};
-    }
-  };
+export default {
+  data: () => {
+    return {};
+  }
+};
 </script>

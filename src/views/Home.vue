@@ -7,7 +7,7 @@
             Добавить блок
           </v-btn>
           <v-list>
-            <v-list-tile @click="addSimple()">
+            <v-list-tile @click="addSimple">
               <v-list-tile-title>Простой</v-list-tile-title>
             </v-list-tile>
             <v-list-tile @click="addBlock">
@@ -20,12 +20,20 @@
       <span class="mr-2">Latest Release</span>
     </v-toolbar>
 
-    <SimpleBlock v-for="simpleBlock in simpleBlocks" :key="'simpleBlock' + simpleBlock.number">
+    <SimpleBlock
+      v-for="(simpleBlock, index) in simpleBlocks"
+      :key="'simpleBlock' + simpleBlock.number"
+      v-on:delete-simple-block="simpleBlocks.splice(index, 1)"
+    >
       <template slot>
         <span>{{ simpleBlock.text }}</span>
       </template>
     </SimpleBlock>
-    <Block v-for="block in blocks" :key="'block' + block.number">
+    <Block
+      v-for="(block, index) in blocks"
+      :key="'block' + block.number"
+      v-on:delete-block="blocks.splice(index, 1)"
+    >
       <template slot>
         <span>{{ block.text }}</span>
       </template>
@@ -68,13 +76,13 @@ export default {
     addSimple: function() {
       this.numberOfSimpleBlocks++;
       const textData = this.getRandomText();
-      const simpleBlock = { checked: false, number: this.numberOfSimpleBlocks++, text: textData };
+      const simpleBlock = { checked: false, number: this.numberOfSimpleBlocks, text: textData };
       this.simpleBlocks.push(simpleBlock);
     },
     addBlock: function() {
       this.numberOfBlocks++;
       const textData = this.getRandomText();
-      const block = { checked: false, number: this.numberOfBlocks++, text: textData };
+      const block = { checked: false, number: this.numberOfBlocks, text: textData };
       this.blocks.push(block);
     }
   }

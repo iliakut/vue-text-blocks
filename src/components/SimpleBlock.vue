@@ -8,7 +8,7 @@
       <v-card-title>
         <span>Простой блок</span>
         <v-spacer></v-spacer>
-        <v-btn icon>
+        <v-btn icon v-on:click="$emit('delete-simple-block')">
           <v-icon>clear</v-icon>
         </v-btn>
       </v-card-title>
@@ -22,7 +22,6 @@
           <v-list-tile-title>Атлант расправил плечи (с)</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
-
     </v-card>
   </v-container>
 </template>
