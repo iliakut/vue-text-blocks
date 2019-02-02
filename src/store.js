@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     text_data
   },
+  getters: {},
   mutations: {},
   actions: {}
 });

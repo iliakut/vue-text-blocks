@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    123
+    <slot><span>123</span></slot>
   </v-container>
 </template>
 
