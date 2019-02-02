@@ -6,7 +6,12 @@
       dark
     >
       <v-card-title>
+        <v-checkbox
+          color="indigo darken-3"
+          v-model="checkbox"
+        ></v-checkbox>
         <span>Простой блок</span>
+
         <v-spacer></v-spacer>
         <v-btn icon v-on:click="$emit('delete-simple-block')">
           <v-icon>clear</v-icon>
@@ -28,8 +33,16 @@
 
 <script>
 export default {
+  props: {
+    checkbox: {
+      type: Boolean,
+      default: false,
+      required: true
+    }
+  },
   data: () => {
-    return {};
+    return {
+    };
   }
 };
 </script>
