@@ -6,6 +6,7 @@
       dark
     >
       <v-card-title>
+        <span>Сложный блок</span>
         <v-spacer></v-spacer>
         <v-btn icon>
           <v-icon>clear</v-icon>
