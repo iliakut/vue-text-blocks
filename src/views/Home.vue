@@ -4,7 +4,10 @@
       <v-toolbar-title class="headline text-uppercase">
         <v-menu offset-y>
           <v-btn slot="activator" color="#26c6da" dark>
-            Добавить блок
+            <v-icon>
+              note_add
+            </v-icon>
+            <span>Добавить блок</span>
           </v-btn>
           <v-list>
             <v-list-tile @click="addSimple">
@@ -17,7 +20,7 @@
         </v-menu>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <span class="mr-2">Latest Release</span>
+
     </v-toolbar>
 
     <SimpleBlock
@@ -38,6 +41,24 @@
         <span>{{ block.text }}</span>
       </template>
     </Block>
+    <v-footer fixed>
+      <v-icon>
+        note
+      </v-icon>
+      <span>{{ this.blocks.length + this.simpleBlocks.length }}</span>
+      <v-icon>
+        check_circle
+      </v-icon>
+      <span>1</span>
+      <v-icon color="green darken-2">
+        check_circle
+      </v-icon>
+      <span>2</span>
+      <v-icon color="red darken-3">
+        check_circle
+      </v-icon>
+      <span>3</span>
+    </v-footer>
   </v-container>
 </template>
 
