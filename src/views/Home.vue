@@ -20,13 +20,13 @@
         </v-menu>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-
     </v-toolbar>
 
     <SimpleBlock
       v-for="(simpleBlock, index) in simpleBlocks"
       :key="'simpleBlock' + simpleBlock.number"
-      v-on:delete-simple-block="simpleBlocks.splice(index, 1)"
+      v-bind:numberOfBlock="index"
+      v-on:delete-simple-block="deleteSimpleBlock({ index: index })"
     >
       <template slot>
         <span>{{ simpleBlock.text }}</span>
@@ -35,7 +35,8 @@
     <Block
       v-for="(block, index) in blocks"
       :key="'block' + block.number"
-      v-on:delete-block="blocks.splice(index, 1)"
+      v-bind:numberOfBlock="index"
+      v-on:delete-block="deleteBlock({ index: index })"
     >
       <template slot>
         <span>{{ block.text }}</span>
@@ -45,19 +46,19 @@
       <v-icon>
         note
       </v-icon>
-      <span>{{ this.blocks.length + this.simpleBlocks.length }}</span>
+      <span>{{ blocks.length + simpleBlocks.length }}</span>
       <v-icon>
         check_circle
       </v-icon>
-      <span>1</span>
+      <span>{{ checkedBlocks }}</span>
       <v-icon color="green darken-2">
         check_circle
       </v-icon>
-      <span>2</span>
+      <span>{{ checkedGreenBlocks }}</span>
       <v-icon color="red darken-3">
         check_circle
       </v-icon>
-      <span>3</span>
+      <span>{{ checkedRedBlocks }}</span>
     </v-footer>
   </v-container>
 </template>
@@ -65,7 +66,7 @@
 <script>
 import SimpleBlock from "../components/SimpleBlock";
 import Block from "../components/Block";
-import { mapState } from "vuex";
+import { mapState, mapActions, mapMutations, mapGetters } from "vuex";
 
 export default {
   components: {
@@ -73,39 +74,20 @@ export default {
     Block
   },
   data: () => {
-    return {
-      numberOfSimpleBlocks: 0,
-      numberOfBlocks: 0,
-      block: {checked: false, isRed: false, number: 0, text: ""},
-      simpleBlocks: [],
-      blocks: []
-    };
+    return {};
   },
   computed: {
-    ...mapState(["text_data"])
+    ...mapState([
+      "text_data",
+      "simpleBlocks",
+      "blocks",
+      "checkedBlocks"
+    ]),
+    ...mapGetters(["checkedBlocks", "checkedRedBlocks", "checkedGreenBlocks"])
   },
   methods: {
-    getRandomInteger: function(min, max) {
-      let rand = min + Math.random() * (max + 1 - min);
-      rand = Math.floor(rand);
-      return rand;
-    },
-    getRandomText: function() {
-      const rand = this.getRandomInteger(0, this.text_data.length);
-      return this.text_data[rand];
-    },
-    addSimple: function() {
-      this.numberOfSimpleBlocks++;
-      const textData = this.getRandomText();
-      const simpleBlock = { checked: false, number: this.numberOfSimpleBlocks, text: textData };
-      this.simpleBlocks.push(simpleBlock);
-    },
-    addBlock: function() {
-      this.numberOfBlocks++;
-      const textData = this.getRandomText();
-      const block = { checked: false, number: this.numberOfBlocks, text: textData };
-      this.blocks.push(block);
-    }
+    ...mapMutations(["deleteSimpleBlock", "deleteBlock"]),
+    ...mapActions(["addSimple", "addBlock"])
   }
 };
 </script>

@@ -6,12 +6,8 @@
       dark
     >
       <v-card-title>
-        <v-checkbox
-          color="indigo darken-3"
-          v-model="checkbox"
-        ></v-checkbox>
+        <v-checkbox color="indigo darken-3" v-model="check"></v-checkbox>
         <span>Простой блок</span>
-
         <v-spacer></v-spacer>
         <v-btn icon v-on:click="$emit('delete-simple-block')">
           <v-icon>clear</v-icon>
@@ -32,17 +28,27 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+
 export default {
+  data: () => {
+    return {
+      check: false
+    };
+  },
   props: {
-    checkbox: {
-      type: Boolean,
-      default: false,
+    numberOfBlock: {
+      type: Number,
       required: true
     }
   },
-  data: () => {
-    return {
-    };
+  methods: {
+    ...mapMutations(["changeSimpleBlock"])
+  },
+  watch: {
+    check: function(val) {
+      this.changeSimpleBlock({ number: this.numberOfBlock, checked: val });
+    }
   }
 };
 </script>

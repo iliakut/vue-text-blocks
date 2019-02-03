@@ -1,11 +1,13 @@
 <template>
   <v-container>
     <v-card
+      @dblclick="isRed = !isRed"
       class="mx-auto"
-      color="#26c6da"
+      :color=color
       dark
     >
       <v-card-title>
+        <v-checkbox color="indigo darken-3" v-model="check"></v-checkbox>
         <span>Сложный блок</span>
         <v-spacer></v-spacer>
         <v-btn icon v-on:click="$emit('delete-block')">
@@ -27,9 +29,40 @@
 </template>
 
 <script>
+import { mapMutations, mapState } from "vuex";
 export default {
   data: () => {
-    return {};
+    return {
+      check: false,
+      isRed: false,
+      color: "green darken-2"
+    };
+  },
+  props: {
+    numberOfBlock: {
+      type: Number,
+      required: true
+    }
+  },
+  methods: {
+    ...mapMutations(["changeBlock", "changeBlockColor"])
+  },
+  watch: {
+    check: function(val) {
+      this.changeBlock({ number: this.numberOfBlock, checked: val });
+    },
+    isRed: function(val) {
+      if (val) {
+        this.color = "red darken-3";
+        this.changeBlockColor({ number: this.numberOfBlock, isRed: true });
+      } else {
+        this.color = "green darken-2";
+        this.changeBlockColor({ number: this.numberOfBlock, isRed: false });
+      }
+    }
+  },
+  computed: {
+    ...mapState(["blocks"])
   }
 };
 </script>
