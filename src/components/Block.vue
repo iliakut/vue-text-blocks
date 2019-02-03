@@ -1,6 +1,7 @@
 <template>
   <v-container>
-    <v-card v-touch:longtap="long_tap"
+    <v-card
+      v-touch:longtap="long_tap"
       @dblclick="isRed = !isRed"
       class="mx-auto"
       :color="color"
@@ -64,7 +65,7 @@ export default {
   methods: {
     ...mapMutations(["changeBlock", "changeBlockColor"]),
     long_tap: function() {
-      this.isRed = !this.isRed
+      this.isRed = !this.isRed;
     }
   },
   watch: {

@@ -77,12 +77,7 @@ export default {
     return {};
   },
   computed: {
-    ...mapState([
-      "text_data",
-      "simpleBlocks",
-      "blocks",
-      "checkedBlocks"
-    ]),
+    ...mapState(["text_data", "simpleBlocks", "blocks", "checkedBlocks"]),
     ...mapGetters(["checkedBlocks", "checkedRedBlocks", "checkedGreenBlocks"])
   },
   methods: {

@@ -1,10 +1,6 @@
 <template>
   <v-container>
-    <v-card
-      class="mx-auto"
-      color="#26c6da"
-      dark
-    >
+    <v-card class="mx-auto" color="#26c6da" dark>
       <v-card-title>
         <v-checkbox color="indigo darken-3" v-model="check"></v-checkbox>
         <span>Простой блок</span>
